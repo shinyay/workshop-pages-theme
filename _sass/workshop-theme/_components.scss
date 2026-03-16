@@ -7,11 +7,12 @@
   background: var(--bg-secondary);
   border: 1px solid var(--border-primary);
   border-radius: $border-radius-lg;
-  padding: 28px 28px 24px;
+  padding: 32px 32px 28px;
   margin-bottom: 32px;
   position: relative;
   overflow: hidden;
 
+  // Gradient top bar (thicker, more dramatic)
   &::before {
     content: '';
     position: absolute;
@@ -19,17 +20,72 @@
     left: 0;
     right: 0;
     height: 4px;
-    background: $gh-green;
+    background: linear-gradient(90deg, $gh-green, $gh-purple, $gh-blue);
+    background-size: 200% 100%;
+    animation: gradient-shift 6s ease infinite;
   }
 
-  // Category-specific top border colors
-  &[data-category="copilot-ai"]::before { background: $cat-copilot; }
-  &[data-category="legacy-modernization"]::before { background: $cat-legacy; }
-  &[data-category="github-platform"]::before { background: $cat-github; }
-  &[data-category="ai-ml"]::before { background: $cat-ai-ml; }
-  &[data-category="cloud-infra"]::before { background: $cat-cloud; }
-  &[data-category="spring-java"]::before { background: $cat-spring; }
-  &[data-category="devops-containers"]::before { background: $cat-devops; }
+  // Subtle gradient mesh background
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 50%;
+    height: 100%;
+    background: radial-gradient(ellipse at 100% 0%, rgba($gh-purple, 0.06) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 100%, rgba($gh-green, 0.04) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  // Category-specific gradient
+  &[data-category="copilot-ai"]::before { background: linear-gradient(90deg, $gh-purple, $cat-copilot, $gh-blue); background-size: 200% 100%; animation: gradient-shift 6s ease infinite; }
+  &[data-category="copilot-ai"]::after { background: radial-gradient(ellipse at 100% 0%, rgba($gh-purple, 0.08) 0%, transparent 60%), radial-gradient(ellipse at 80% 100%, rgba($gh-blue, 0.04) 0%, transparent 50%); }
+  &[data-category="legacy-modernization"]::before { background: linear-gradient(90deg, $cat-legacy, #ff6b6b, $gh-orange); background-size: 200% 100%; animation: gradient-shift 6s ease infinite; }
+  &[data-category="github-platform"]::before { background: linear-gradient(90deg, $cat-github, $gh-blue-light, $gh-green); background-size: 200% 100%; animation: gradient-shift 6s ease infinite; }
+  &[data-category="ai-ml"]::before { background: linear-gradient(90deg, $cat-ai-ml, $gh-green, $gh-blue); background-size: 200% 100%; animation: gradient-shift 6s ease infinite; }
+  &[data-category="cloud-infra"]::before { background: linear-gradient(90deg, $cat-cloud, #e3b341, $gh-orange); background-size: 200% 100%; animation: gradient-shift 6s ease infinite; }
+  &[data-category="spring-java"]::before { background: linear-gradient(90deg, $cat-spring, $gh-green-light, $gh-green); background-size: 200% 100%; animation: gradient-shift 6s ease infinite; }
+  &[data-category="devops-containers"]::before { background: linear-gradient(90deg, $cat-devops, #c69026, $gh-orange); background-size: 200% 100%; animation: gradient-shift 6s ease infinite; }
+}
+
+@keyframes gradient-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+// Copilot sparkle decorations
+.header-sparkles {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.sparkle {
+  position: absolute;
+  opacity: 0;
+  animation: sparkle-fade 4s ease-in-out infinite;
+
+  &-1 { top: 12px; right: 40px; color: rgba($gh-purple, 0.5); animation-delay: 0s; }
+  &-2 { top: 30px; right: 80px; color: rgba($gh-green, 0.4); animation-delay: 1.5s; }
+  &-3 { top: 50px; right: 20px; color: rgba($gh-blue, 0.35); animation-delay: 0.8s; }
+  &-4 { top: 20px; right: 120px; color: rgba($gh-purple, 0.3); animation-delay: 2.2s; }
+  &-5 { bottom: 20px; right: 60px; color: rgba($gh-green, 0.3); animation-delay: 3s; }
+}
+
+@keyframes sparkle-fade {
+  0%, 100% { opacity: 0; transform: scale(0.5) rotate(0deg); }
+  50% { opacity: 1; transform: scale(1) rotate(180deg); }
 }
 
 .workshop-title {
@@ -135,6 +191,17 @@
     transform: translateY(-1px);
     color: #000;
   }
+}
+
+// Glowing CTA button
+.btn-glow {
+  box-shadow: 0 0 0 0 rgba($gh-green, 0);
+  animation: btn-pulse 3s ease-in-out infinite;
+}
+
+@keyframes btn-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba($gh-green, 0); }
+  50% { box-shadow: 0 0 12px 2px rgba($gh-green, 0.25); }
 }
 
 .btn-outline {
@@ -504,4 +571,66 @@
     font-family: inherit;
     box-shadow: 0 1px 0 var(--border-primary);
   }
+}
+
+// --- Step Number Badge (Gradient Ring) ---
+.step-number-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 14px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+  border-radius: 20px;
+  background: var(--bg-secondary);
+  position: relative;
+  z-index: 0;
+  margin-bottom: 8px;
+
+  // Gradient ring border
+  &::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border-radius: 22px;
+    background: conic-gradient(from 0deg, $gh-green, $gh-purple, $gh-blue, $gh-green);
+    z-index: -1;
+  }
+
+  // Inner fill to mask the gradient
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 20px;
+    background: var(--bg-secondary);
+    z-index: -1;
+  }
+}
+
+// --- Code Block Language Labels ---
+.code-lang-label {
+  position: absolute;
+  top: 0;
+  left: 12px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  background: var(--bg-secondary);
+  padding: 2px 8px;
+  border-radius: 0 0 4px 4px;
+  border: 1px solid var(--code-border);
+  border-top: none;
+  z-index: 1;
+  opacity: 0.7;
+  transition: opacity $transition-fast;
+}
+
+.code-block-wrapper:hover .code-lang-label {
+  opacity: 1;
 }

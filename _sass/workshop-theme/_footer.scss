@@ -4,9 +4,21 @@
 
 .site-footer {
   padding: 24px;
-  border-top: 1px solid var(--border-primary);
+  border-top: none;
   background: var(--bg-secondary);
   transition: background-color $transition-normal, border-color $transition-normal;
+  position: relative;
+
+  // Gradient separator line (green → purple → green)
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, $gh-green, $gh-purple, $gh-blue, transparent);
+  }
 }
 
 .footer-container {

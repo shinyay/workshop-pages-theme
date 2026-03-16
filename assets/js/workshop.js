@@ -303,12 +303,30 @@
     });
   }
 
+  // ─── Code Language Labels ────────────────────────────────────
+  function addCodeLanguageLabels() {
+    var codeBlocks = document.querySelectorAll('.content-body pre code[class*="language-"]');
+    codeBlocks.forEach(function (code) {
+      var cls = Array.from(code.classList).find(function (c) { return c.startsWith('language-'); });
+      if (!cls) return;
+      var lang = cls.replace('language-', '');
+      var wrapper = code.closest('.code-block-wrapper');
+      if (!wrapper || wrapper.querySelector('.code-lang-label')) return;
+
+      var label = document.createElement('span');
+      label.className = 'code-lang-label';
+      label.textContent = lang;
+      wrapper.appendChild(label);
+    });
+  }
+
   // ─── Init ───────────────────────────────────────────────────
   document.addEventListener('DOMContentLoaded', function () {
     generateTOC();
     highlightActiveStep();
     transformCallouts();
     addCopyButtons();
+    addCodeLanguageLabels();
     deduplicateHeadings();
     markStepVisited();
     updateProgressUI();
