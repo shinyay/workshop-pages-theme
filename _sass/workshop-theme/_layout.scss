@@ -2,19 +2,19 @@
 // Workshop Theme — Layout (Grid Structure)
 // ============================================
 
-.page-wrapper {
+.page-container {
   display: flex;
   min-height: 100vh;
   flex-direction: column;
+  padding-top: var(--nav-height);
 }
 
-.content-wrapper {
+.workshop-layout {
   display: flex;
   flex: 1;
   max-width: var(--max-width);
   margin: 0 auto;
   width: 100%;
-  padding-top: var(--nav-height);
 }
 
 .main-content {
@@ -24,7 +24,7 @@
 }
 
 // With sidebar layout
-.has-sidebar .content-wrapper {
+.workshop-layout.with-sidebar {
   .sidebar {
     width: var(--sidebar-width);
     flex-shrink: 0;
@@ -35,7 +35,7 @@
 }
 
 // Without sidebar (single-page workshop)
-.no-sidebar .main-content {
+.workshop-layout:not(.with-sidebar) .main-content {
   max-width: 860px;
   margin: 0 auto;
 }

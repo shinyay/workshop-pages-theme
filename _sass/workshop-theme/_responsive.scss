@@ -8,7 +8,7 @@
     padding: 24px 24px 40px;
   }
 
-  .has-sidebar .content-wrapper {
+  .workshop-layout.with-sidebar {
     .sidebar {
       width: 220px;
     }
@@ -37,7 +37,7 @@
   }
 
   // Sidebar becomes slide-out panel
-  .has-sidebar .content-wrapper {
+  .workshop-layout.with-sidebar {
     .sidebar {
       position: fixed;
       top: var(--nav-height);
@@ -67,7 +67,7 @@
     background: rgba(0, 0, 0, 0.5);
     z-index: 80;
 
-    &.active {
+    &.open {
       display: block;
     }
   }
@@ -108,7 +108,7 @@
     text-align: center;
   }
 
-  .content {
+  .content-body {
     h1 { font-size: 24px; }
     h2 { font-size: 20px; }
     h3 { font-size: 16px; }
