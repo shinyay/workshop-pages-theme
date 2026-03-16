@@ -1,0 +1,95 @@
+// ============================================
+// Workshop Theme — Variables (GitHub Brand)
+// ============================================
+
+// GitHub Brand Colors
+$gh-green: #0FBF3E;
+$gh-green-light: #8CF2A6;
+$gh-green-dark: #08872B;
+$gh-purple: #8534F3;
+$gh-purple-light: #C898FD;
+$gh-orange: #FE4C25;
+$gh-blue: #0969da;
+$gh-blue-light: #58a6ff;
+
+// Category Colors
+$cat-copilot: #8534F3;
+$cat-legacy: #da3633;
+$cat-github: #0969da;
+$cat-ai-ml: #1a7f37;
+$cat-cloud: #bf8700;
+$cat-spring: #0FBF3E;
+$cat-devops: #8a6534;
+
+// Layout
+$max-width: 1200px;
+$sidebar-width: 260px;
+$nav-height: 60px;
+$border-radius: 8px;
+$border-radius-lg: 12px;
+
+// Transitions
+$transition-fast: 150ms ease;
+$transition-normal: 250ms ease;
+
+// CSS Custom Properties (for runtime theming)
+:root {
+  --gh-green: #{$gh-green};
+  --gh-green-light: #{$gh-green-light};
+  --gh-purple: #{$gh-purple};
+  --nav-height: #{$nav-height};
+  --sidebar-width: #{$sidebar-width};
+  --max-width: #{$max-width};
+}
+
+[data-theme="dark"] {
+  --bg-primary: #0d1117;
+  --bg-secondary: #161b22;
+  --bg-tertiary: #21262d;
+  --bg-overlay: rgba(13, 17, 23, 0.85);
+  --border-primary: #30363d;
+  --border-secondary: #21262d;
+  --text-primary: #e6edf3;
+  --text-secondary: #7d8590;
+  --text-muted: #484f58;
+  --text-link: #58a6ff;
+  --shadow-card: 0 2px 8px rgba(0, 0, 0, 0.3);
+  --code-bg: #161b22;
+  --code-border: #30363d;
+  --callout-note-bg: rgba(9, 105, 218, 0.1);
+  --callout-note-border: #0969da;
+  --callout-tip-bg: rgba(15, 191, 62, 0.1);
+  --callout-tip-border: #0FBF3E;
+  --callout-warning-bg: rgba(191, 135, 0, 0.1);
+  --callout-warning-border: #bf8700;
+  --callout-caution-bg: rgba(218, 54, 51, 0.1);
+  --callout-caution-border: #da3633;
+  --callout-important-bg: rgba(133, 52, 243, 0.1);
+  --callout-important-border: #8534F3;
+}
+
+[data-theme="light"] {
+  --bg-primary: #ffffff;
+  --bg-secondary: #f6f8fa;
+  --bg-tertiary: #eaeef2;
+  --bg-overlay: rgba(255, 255, 255, 0.85);
+  --border-primary: #d1d9e0;
+  --border-secondary: #eaeef2;
+  --text-primary: #1f2328;
+  --text-secondary: #656d76;
+  --text-muted: #8b949e;
+  --text-link: #0969da;
+  --shadow-card: 0 1px 3px rgba(31, 35, 40, 0.12);
+  --code-bg: #f6f8fa;
+  --code-border: #d1d9e0;
+  --callout-note-bg: rgba(9, 105, 218, 0.08);
+  --callout-note-border: #0969da;
+  --callout-tip-bg: rgba(15, 191, 62, 0.08);
+  --callout-tip-border: #0FBF3E;
+  --callout-warning-bg: rgba(191, 135, 0, 0.08);
+  --callout-warning-border: #bf8700;
+  --callout-caution-bg: rgba(218, 54, 51, 0.08);
+  --callout-caution-border: #da3633;
+  --callout-important-bg: rgba(133, 52, 243, 0.08);
+  --callout-important-border: #8534F3;
+}

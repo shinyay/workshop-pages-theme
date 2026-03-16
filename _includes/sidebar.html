@@ -1,0 +1,35 @@
+{% assign steps = site.pages | where: "layout", "step" | sort: "step_number" %}
+{% if steps.size > 0 %}
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-title">Workshop Steps</div>
+  <ul class="step-list">
+    <li class="step-item">
+      <a href="{{ '/' | relative_url }}" class="step-link {% if page.layout == 'workshop' %}active{% endif %}">
+        <span class="step-dot"></span>
+        Overview
+      </a>
+    </li>
+    {% for step in steps %}
+    <li class="step-item">
+      <a href="{{ step.url | relative_url }}" class="step-link {% if page.url == step.url %}active{% endif %}">
+        <span class="step-dot"></span>
+        {{ step.step_number }}. {{ step.title }}
+      </a>
+    </li>
+    {% endfor %}
+  </ul>
+
+  {% if site.workshop.show_progress != false %}
+  {% assign current_step = page.step_number | default: 0 %}
+  {% assign total_steps = steps.size %}
+  {% assign progress = current_step | times: 100 | divided_by: total_steps %}
+  <div class="sidebar-progress">
+    <div class="progress-label">Progress: {{ current_step }}/{{ total_steps }}</div>
+    <div class="progress-bar">
+      <div class="progress-fill" style="width: {{ progress }}%"></div>
+    </div>
+  </div>
+  {% endif %}
+</aside>
+<div class="sidebar-overlay" id="sidebar-overlay"></div>
+{% endif %}

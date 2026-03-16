@@ -1,0 +1,116 @@
+// ============================================
+// Workshop Theme — Responsive Breakpoints
+// ============================================
+
+// Tablet (768px - 1023px)
+@media (max-width: 1023px) {
+  .main-content {
+    padding: 24px 24px 40px;
+  }
+
+  .has-sidebar .content-wrapper {
+    .sidebar {
+      width: 220px;
+    }
+    .main-content {
+      max-width: calc(100% - 220px);
+    }
+  }
+
+  .workshop-title {
+    font-size: 24px;
+  }
+}
+
+// Mobile (< 768px)
+@media (max-width: 767px) {
+  .nav-hamburger {
+    display: flex;
+  }
+
+  .nav-right .nav-link {
+    display: none;
+  }
+
+  .main-content {
+    padding: 20px 16px 32px;
+  }
+
+  // Sidebar becomes slide-out panel
+  .has-sidebar .content-wrapper {
+    .sidebar {
+      position: fixed;
+      top: var(--nav-height);
+      left: 0;
+      width: 280px;
+      height: calc(100vh - var(--nav-height));
+      z-index: 90;
+      transform: translateX(-100%);
+      transition: transform $transition-normal;
+      box-shadow: 4px 0 12px rgba(0, 0, 0, 0.2);
+
+      &.open {
+        transform: translateX(0);
+      }
+    }
+
+    .main-content {
+      max-width: 100%;
+    }
+  }
+
+  .sidebar-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    top: var(--nav-height);
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 80;
+
+    &.active {
+      display: block;
+    }
+  }
+
+  .workshop-header {
+    padding: 20px 16px 16px;
+  }
+
+  .workshop-title {
+    font-size: 22px;
+  }
+
+  .workshop-badges {
+    gap: 6px;
+  }
+
+  .workshop-actions {
+    flex-direction: column;
+
+    .btn {
+      justify-content: center;
+    }
+  }
+
+  .step-navigation {
+    flex-direction: column;
+    gap: 8px;
+
+    .step-nav-btn {
+      max-width: 100%;
+      width: 100%;
+      justify-content: center;
+    }
+  }
+
+  .footer-container {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .content {
+    h1 { font-size: 24px; }
+    h2 { font-size: 20px; }
+    h3 { font-size: 16px; }
+  }
+}

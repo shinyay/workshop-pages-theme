@@ -1,0 +1,48 @@
+{% assign steps = site.pages | where: "layout", "step" | sort: "step_number" %}
+{% if steps.size > 0 %}
+{% assign current_index = nil %}
+{% for step in steps %}
+  {% if step.url == page.url %}
+    {% assign current_index = forloop.index0 %}
+  {% endif %}
+{% endfor %}
+
+<div class="step-navigation">
+  {% if current_index and current_index > 0 %}
+    {% assign prev_step = steps[current_index | minus: 1] %}
+    <a href="{{ prev_step.url | relative_url }}" class="step-nav-btn">
+      <svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor"><path d="M7.78 12.53a.75.75 0 0 1-1.06 0L2.47 8.28a.75.75 0 0 1 0-1.06l4.25-4.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042L4.81 7h7.44a.75.75 0 0 1 0 1.5H4.81l2.97 2.97a.75.75 0 0 1 0 1.06Z"/></svg>
+      <div>
+        <div class="step-nav-label">Previous</div>
+        <div class="step-nav-title">{{ prev_step.title }}</div>
+      </div>
+    </a>
+  {% elsif current_index == 0 %}
+    <a href="{{ '/' | relative_url }}" class="step-nav-btn">
+      <svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor"><path d="M7.78 12.53a.75.75 0 0 1-1.06 0L2.47 8.28a.75.75 0 0 1 0-1.06l4.25-4.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042L4.81 7h7.44a.75.75 0 0 1 0 1.5H4.81l2.97 2.97a.75.75 0 0 1 0 1.06Z"/></svg>
+      <div>
+        <div class="step-nav-label">Previous</div>
+        <div class="step-nav-title">Overview</div>
+      </div>
+    </a>
+  {% else %}
+    <span class="step-nav-btn disabled"></span>
+  {% endif %}
+
+  <span class="step-counter">Step {{ page.step_number }} of {{ steps.size }}</span>
+
+  {% if current_index != nil and current_index < steps.size | minus: 1 %}
+    {% assign next_index = current_index | plus: 1 %}
+    {% assign next_step = steps[next_index] %}
+    <a href="{{ next_step.url | relative_url }}" class="step-nav-btn">
+      <div>
+        <div class="step-nav-label">Next</div>
+        <div class="step-nav-title">{{ next_step.title }}</div>
+      </div>
+      <svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor"><path d="M8.22 2.97a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042l2.97-2.97H3.75a.75.75 0 0 1 0-1.5h7.44L8.22 4.03a.75.75 0 0 1 0-1.06Z"/></svg>
+    </a>
+  {% else %}
+    <span class="step-nav-btn disabled"></span>
+  {% endif %}
+</div>
+{% endif %}

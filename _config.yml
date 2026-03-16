@@ -1,0 +1,32 @@
+# Workshop Pages Theme — Default Config
+title: "Workshop"
+description: "A hands-on workshop"
+author: "shinyay"
+
+# Theme defaults for workshops
+workshop:
+  category: "general"
+  difficulty: "Beginner"
+  duration: null
+  language: null
+  prerequisites: []
+  hub_url: "https://shinyay.github.io/awesome-shinyay-workshop/"
+  repo_url: null
+  show_toc: true
+  show_progress: true
+
+# GitHub Pages / Jekyll
+markdown: kramdown
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+
+plugins:
+  - jekyll-remote-theme
+
+# Default front matter
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: "workshop"

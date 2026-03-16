@@ -1,0 +1,34 @@
+// ============================================
+// Workshop Theme — Dark Mode Overrides
+// ============================================
+
+// Most dark mode styling is handled by CSS custom properties in _variables.scss.
+// This file handles edge cases that need explicit dark mode selectors.
+
+[data-theme="dark"] {
+  // Syntax highlighting adjustments
+  .highlight {
+    background: #161b22;
+  }
+
+  // Image brightness reduction
+  .content img {
+    opacity: 0.9;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+  // Badge color adjustments for dark backgrounds
+  .badge-category {
+    color: $gh-purple-light;
+  }
+}
+
+[data-theme="light"] {
+  .badge-category {
+    color: darken($gh-purple, 10%);
+    background: rgba($gh-purple, 0.08);
+  }
+}
