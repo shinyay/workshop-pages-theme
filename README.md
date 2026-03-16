@@ -105,6 +105,36 @@ The theme automatically discovers steps and builds the sidebar navigation + prog
 
 ---
 
+## 🤖 Generation Rules (Automated Workshop Setup)
+
+Three ways to create new workshop sites that use this theme:
+
+### Option 1: Copilot CLI Extension (Recommended)
+
+If you have this repo cloned and use Copilot CLI, the **`workshop-generator`** extension provides three tools:
+
+| Tool | What it does |
+|------|-------------|
+| `workshop_scaffold` | Creates complete workshop setup (config, pages, workflow) |
+| `workshop_add_step` | Adds a new step with README + Cheatsheet |
+| `workshop_validate` | Checks structure, front matter, and step ordering |
+
+The extension also auto-detects workshop repos and injects theme conventions into your Copilot sessions.
+
+### Option 2: Generator Script
+
+```bash
+curl -sL https://raw.githubusercontent.com/shinyay/workshop-pages-theme/main/bin/setup-workshop.sh | bash
+```
+
+Interactive CLI that prompts for title, category, language, difficulty, duration, and step count.
+
+### Option 3: Custom Instructions for Copilot
+
+Copy `_templates/copilot-instructions.md.template` to your workshop repo as `.github/copilot-instructions.md`. This teaches Copilot all the theme conventions so it can help you create and maintain content.
+
+---
+
 ## 🛠️ Local Development
 
 Test the theme locally before deploying:

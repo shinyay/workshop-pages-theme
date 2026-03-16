@@ -1,0 +1,346 @@
+# Copilot Instructions — Workshop Repository
+
+## Repository Overview
+
+This repository is a workshop that uses the `shinyay/workshop-pages-theme` Jekyll remote theme for GitHub Pages. The workshop is about: {WORKSHOP_DESCRIPTION}
+
+All layouts, includes, stylesheets, and JavaScript are provided by the remote theme. This repository only contains configuration, content pages, and (optionally) sample application code for hands-on exercises.
+
+---
+
+## Theme Activation
+
+The remote theme is activated through two settings in `_config.yml`:
+
+```yaml
+remote_theme: shinyay/workshop-pages-theme
+plugins:
+  - jekyll-remote-theme
+```
+
+Do **not** copy theme layouts, includes, SCSS, or JS files into this repository. The `jekyll-remote-theme` plugin fetches them automatically at build time.
+
+---
+
+## Configuration Reference
+
+The full `_config.yml` structure for this workshop:
+
+```yaml
+remote_theme: shinyay/workshop-pages-theme
+
+title: "{WORKSHOP_TITLE}"
+description: "{DESCRIPTION}"
+author: "shinyay"
+
+plugins:
+  - jekyll-remote-theme
+
+workshop:
+  category: "{CATEGORY}"        # copilot-ai | github-platform | ai-ml | cloud-infra | spring-java | devops-containers | legacy-modernization | general
+  language: "{LANGUAGE}"         # e.g., Python, TypeScript, Java, Go
+  difficulty: "{DIFFICULTY}"     # Beginner | Intermediate | Advanced
+  duration: "{DURATION}"         # e.g., "2-3 hours"
+  prerequisites:
+    - "{PREREQ_1}"
+    - "{PREREQ_2}"
+  hub_url: "https://shinyay.github.io/awesome-shinyay-workshop/"
+  show_toc: true
+  show_progress: true
+
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: "workshop"
+```
+
+### Configuration Fields
+
+| Field | Required | Description |
+|-------|----------|-------------|
+| `remote_theme` | Yes | Must be `shinyay/workshop-pages-theme` |
+| `title` | Yes | Workshop title shown in the header and browser tab |
+| `description` | Yes | Short description for SEO and the landing page |
+| `workshop.category` | Yes | Controls the header gradient color scheme |
+| `workshop.language` | No | Primary programming language used in exercises |
+| `workshop.difficulty` | Yes | One of `Beginner`, `Intermediate`, or `Advanced` |
+| `workshop.duration` | Yes | Estimated completion time (e.g., `"2-3 hours"`) |
+| `workshop.prerequisites` | No | List of prerequisite skills or tools |
+| `workshop.hub_url` | No | URL back to the workshop hub |
+| `workshop.show_toc` | No | Show table of contents on step pages (default `true`) |
+| `workshop.show_progress` | No | Enable progress tracking (default `true`) |
+
+---
+
+## Page Types & Front Matter
+
+### Overview Page (`index.md`)
+
+```yaml
+---
+layout: workshop
+---
+```
+
+The landing page should include:
+- Workshop overview and learning objectives
+- How to use this workshop (navigation instructions)
+- Skill progression table mapping levels to skills gained
+- Curriculum table with links to each step
+- Quick start commands to set up the development environment
+- Requirements and prerequisites
+
+### Step Pages (`workshop/level-N/README.md`)
+
+```yaml
+---
+layout: step
+title: "Step Title"
+step_number: N           # 0 for setup, 1+ for content steps
+permalink: /steps/N/     # Must match step_number
+---
+```
+
+Content guidelines for step pages:
+- Start with a brief intro paragraph explaining what this step covers
+- Use `##` for major sections, `###` for subsections
+- Include code blocks with language identifiers (` ```bash `, ` ```python `, ` ```yaml `, etc.)
+- Use callouts for tips and warnings (see Content Writing Rules below)
+- Include hands-on exercises with clear, numbered instructions
+- End with a summary or "What you accomplished" section
+
+### Cheatsheet Pages (`workshop/level-N/CHEATSHEET.md`)
+
+```yaml
+---
+layout: cheatsheet
+title: "Level N — Quick Reference"
+parent_step: N           # Must match the step_number of the parent step
+permalink: /cheatsheet/N/
+---
+```
+
+Cheatsheet content should include:
+- Command tables with descriptions
+- Syntax summaries and quick reference material
+- Common patterns and examples
+- Troubleshooting tips for the parent step
+
+### Setup Page (`setup.md`)
+
+```yaml
+---
+layout: step
+title: "Setup & Installation"
+step_number: 0
+permalink: /setup/
+---
+```
+
+The setup page is step 0. It should cover environment setup, tool installation, repository cloning, and any initial configuration needed before starting the workshop.
+
+---
+
+## Directory Structure
+
+```
+{REPO_NAME}/
+├── _config.yml                    # Theme configuration
+├── index.md                       # Landing page (layout: workshop)
+├── setup.md                       # Setup guide (layout: step, step_number: 0)
+├── workshop/
+│   ├── level-1/
+│   │   ├── README.md              # Step content (layout: step, step_number: 1)
+│   │   ├── CHEATSHEET.md          # Quick ref (layout: cheatsheet, parent_step: 1)
+│   │   └── sample-app/            # Practice code for this level
+│   ├── level-2/
+│   │   ├── README.md
+│   │   ├── CHEATSHEET.md
+│   │   └── sample-app/
+│   └── ...
+├── .github/
+│   ├── workflows/
+│   │   └── deploy-pages.yml       # GitHub Pages deployment
+│   └── copilot-instructions.md    # This file
+└── README.md                      # Repository README (not rendered by theme)
+```
+
+Key conventions:
+- Steps live in `workshop/level-N/` directories, numbered sequentially starting at 1.
+- Setup is always `setup.md` at the root with `step_number: 0`.
+- Each level directory may contain a `sample-app/` folder with practice code.
+- The `index.md` at the root is the workshop landing page.
+
+---
+
+## Content Writing Rules
+
+1. **Fenced code blocks with language identifiers** — Always specify the language: ` ```bash `, ` ```python `, ` ```yaml `, ` ```json `, ` ```java `, etc. The theme auto-adds copy buttons and language labels to every code block.
+
+2. **GitHub callout syntax** — Use these for tips, warnings, and important notes:
+   ```markdown
+   > [!TIP]
+   > Helpful advice for the reader.
+
+   > [!NOTE]
+   > Additional context or information.
+
+   > [!WARNING]
+   > Potential pitfalls or things to watch out for.
+
+   > [!IMPORTANT]
+   > Critical information the reader must know.
+
+   > [!CAUTION]
+   > Actions that could cause problems if done incorrectly.
+   ```
+
+3. **Numbered exercise steps** — Structure hands-on exercises as numbered lists with clear commands and expected output:
+   ```markdown
+   1. Create the project directory:
+      ```bash
+      mkdir my-project && cd my-project
+      ```
+   2. Initialize the project:
+      ```bash
+      npm init -y
+      ```
+      Expected output:
+      ```
+      Wrote to /path/to/my-project/package.json
+      ```
+   ```
+
+4. **Include expected output** — After commands, show what the user should see so they can verify success.
+
+5. **Specify the working directory** — When commands must be run from a specific directory, state it explicitly before the code block.
+
+6. **Step duration** — Each step should be completable in 15–30 minutes.
+
+7. **"What you'll learn" opener** — Start each step with a bullet list of learning objectives:
+   ```markdown
+   ## What You'll Learn
+   - How to configure authentication
+   - How to set up API endpoints
+   - How to write integration tests
+   ```
+
+8. **"What you accomplished" closer** — End each step with a summary:
+   ```markdown
+   ## What You Accomplished
+   In this step you:
+   - Configured JWT-based authentication
+   - Created three REST API endpoints
+   - Wrote and ran integration tests with 100% pass rate
+   ```
+
+---
+
+## Adding New Steps
+
+When asked to add a new step to the workshop:
+
+1. **Create the step page** at `workshop/level-{N}/README.md`:
+   ```yaml
+   ---
+   layout: step
+   title: "Step Title"
+   step_number: N
+   permalink: /steps/N/
+   ---
+   ```
+
+2. **Create the cheatsheet** at `workshop/level-{N}/CHEATSHEET.md`:
+   ```yaml
+   ---
+   layout: cheatsheet
+   title: "Level N — Quick Reference"
+   parent_step: N
+   permalink: /cheatsheet/N/
+   ---
+   ```
+
+3. **Optionally create a sample-app directory** at `workshop/level-{N}/sample-app/` for starter code, solution code, or any practice files for that step.
+
+4. **Sidebar navigation updates automatically** — The theme discovers step pages by their `layout: step` front matter and `step_number` values. No manual navigation configuration or linking is needed.
+
+5. **Update `index.md`** — Add the new step to the curriculum table on the landing page so readers can see the full workshop outline.
+
+---
+
+## Deployment
+
+### GitHub Actions Workflow
+
+Place the deployment workflow at `.github/workflows/deploy-pages.yml`:
+
+```yaml
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+      - name: Build with Jekyll
+        uses: actions/jekyll-build-pages@v1
+        with:
+          source: ./
+          destination: ./_site
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+```
+
+### Enabling GitHub Pages
+
+1. Go to the repository **Settings → Pages**.
+2. Under **Source**, select **GitHub Actions**.
+3. Push to `main` to trigger the first deployment.
+
+---
+
+## Design Features Available
+
+The `workshop-pages-theme` provides these features automatically — no extra configuration needed:
+
+| Feature | Description |
+|---------|-------------|
+| **Animated gradient header** | Color scheme is determined by the `category` field in `_config.yml` |
+| **Copilot sparkle animations** | Decorative SVG sparkle effects in the header area |
+| **Auto-generated table of contents** | Built from headings on step pages when `show_toc: true` |
+| **Code copy buttons** | Automatically added to every fenced code block |
+| **Language labels** | Displayed on code blocks based on the language identifier |
+| **Progress tracking** | Tracks completed steps via `localStorage` when `show_progress: true` |
+| **Keyboard navigation** | Use `←` and `→` arrow keys to move between steps |
+| **Light / dark mode toggle** | Theme switcher in the header; respects system preference by default |
+| **Mobile-responsive sidebar** | Collapsible sidebar navigation for smaller screens |
+| **Print-friendly stylesheet** | Clean print layout with hidden navigation elements |
