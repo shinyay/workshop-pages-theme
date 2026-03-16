@@ -133,3 +133,16 @@
     transition: transform $transition-fast, opacity $transition-fast;
   }
 }
+
+// Hamburger → ✕ animation
+.sidebar-open .nav-hamburger {
+  span:nth-child(1) {
+    transform: translateY(6px) rotate(45deg);
+  }
+  span:nth-child(2) {
+    opacity: 0;
+  }
+  span:nth-child(3) {
+    transform: translateY(-6px) rotate(-45deg);
+  }
+}

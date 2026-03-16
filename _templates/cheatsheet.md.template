@@ -1,0 +1,51 @@
+---
+# Cheatsheet Template — Copy this file and customize
+# Required fields are marked with (required)
+layout: cheatsheet          # (required) Must be "cheatsheet"
+title: "Level X — Quick Reference"  # (required) Page title
+parent_step: 1              # (required) Links back to the parent step number
+permalink: /cheatsheet/1/   # (required) URL path
+---
+
+## Key Commands
+
+| Command | Purpose |
+|---------|---------|
+| `command1` | Description |
+| `command2` | Description |
+
+---
+
+## Common Patterns
+
+### Pattern 1: Title
+
+```bash
+example-command --flag value
+```
+
+### Pattern 2: Title
+
+```bash
+another-command
+```
+
+---
+
+## Quick Reference Table
+
+| Concept | Syntax | Example |
+|---------|--------|---------|
+| Item 1 | `syntax` | `example` |
+| Item 2 | `syntax` | `example` |
+
+---
+
+## Tips & Tricks
+
+> [!TIP]
+> Helpful tip for quick reference.
+
+- Tip one
+- Tip two
+- Tip three

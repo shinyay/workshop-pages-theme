@@ -72,6 +72,11 @@
     box-shadow: 0 0 6px rgba($gh-green, 0.4);
   }
 
+  &.visited {
+    background: $gh-green;
+    border-color: $gh-green;
+  }
+
   &.step-dot-sm {
     width: 6px;
     height: 6px;

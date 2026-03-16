@@ -1,0 +1,62 @@
+# _config.yml Template — Copy to your workshop repository root
+# For use with shinyay/workshop-pages-theme
+
+# ─── Basic Info ──────────────────────────────────────────────
+title: "Your Workshop Title"
+description: "A brief description of your workshop"
+author: "shinyay"
+
+# ─── Theme ───────────────────────────────────────────────────
+remote_theme: shinyay/workshop-pages-theme
+
+# ─── Workshop Configuration ─────────────────────────────────
+workshop:
+  # Category determines the accent color bar on the workshop header.
+  # Options: copilot-ai (purple), github-platform (blue), ai-ml (green),
+  #          cloud-infra (yellow), spring-java (green), devops-containers (brown),
+  #          legacy-modernization (red), general (green default)
+  category: "copilot-ai"
+
+  # Difficulty level shown as a badge.
+  # Options: Beginner (green), Intermediate (blue), Advanced (orange)
+  difficulty: "Beginner"
+
+  # Estimated total duration (shown as badge)
+  duration: "2-3 hours"
+
+  # Primary programming language (shown as badge)
+  language: "Python"
+
+  # Prerequisites checklist (shown on overview page)
+  prerequisites:
+    - "Git installed and configured"
+    - "GitHub account with Copilot subscription"
+    - "Node.js 22 or later"
+
+  # URL to the Workshop Hub (shown in header and footer)
+  hub_url: "https://shinyay.github.io/awesome-shinyay-workshop/"
+
+  # GitHub repository URL (auto-detected if hosted on GitHub Pages)
+  # repo_url: "https://github.com/shinyay/your-workshop-repo"
+
+  # Show table of contents on pages (default: true)
+  show_toc: true
+
+  # Show progress bar in sidebar (default: true)
+  show_progress: true
+
+# ─── Jekyll Configuration ───────────────────────────────────
+markdown: kramdown
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+
+plugins:
+  - jekyll-remote-theme
+
+# ─── Default Layouts ────────────────────────────────────────
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: "workshop"

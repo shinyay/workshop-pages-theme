@@ -1,0 +1,119 @@
+// ============================================
+// Workshop Theme — Print Stylesheet
+// ============================================
+
+@media print {
+  // Hide navigation elements
+  .site-header,
+  .sidebar,
+  .sidebar-overlay,
+  .site-footer,
+  .theme-toggle,
+  .nav-hamburger,
+  .back-to-top,
+  .copy-btn,
+  .code-block-wrapper .copy-btn,
+  .step-navigation,
+  .keyboard-hint,
+  .workshop-actions,
+  .toc,
+  .breadcrumb {
+    display: none !important;
+  }
+
+  // Reset layout for print
+  .page-container {
+    padding-top: 0;
+  }
+
+  .workshop-layout {
+    display: block;
+  }
+
+  .main-content {
+    max-width: 100% !important;
+    padding: 0 !important;
+  }
+
+  // Typography
+  body {
+    font-size: 12pt;
+    color: #000;
+    background: #fff;
+  }
+
+  .content-body {
+    h1, h2, h3 {
+      color: #000;
+      page-break-after: avoid;
+    }
+
+    h1 { font-size: 20pt; }
+    h2 { font-size: 16pt; }
+    h3 { font-size: 13pt; }
+
+    // Show URLs after links
+    a[href^="http"]::after {
+      content: " (" attr(href) ")";
+      font-size: 9pt;
+      color: #666;
+    }
+
+    // Code blocks
+    pre {
+      border: 1px solid #ccc;
+      background: #f8f8f8 !important;
+      page-break-inside: avoid;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+    }
+
+    code {
+      background: #f0f0f0 !important;
+      border-color: #ccc !important;
+      color: #000 !important;
+    }
+
+    // Tables
+    table {
+      page-break-inside: avoid;
+
+      th, td {
+        border-color: #999 !important;
+      }
+    }
+
+    // Callouts
+    .callout {
+      border-color: #999 !important;
+      background: #f8f8f8 !important;
+      page-break-inside: avoid;
+    }
+
+    img {
+      max-width: 100%;
+      page-break-inside: avoid;
+    }
+  }
+
+  // Workshop header
+  .workshop-header {
+    border: 1px solid #ccc;
+    background: #f8f8f8 !important;
+    page-break-inside: avoid;
+
+    &::before {
+      display: none;
+    }
+  }
+
+  .step-header {
+    page-break-after: avoid;
+  }
+
+  .badge {
+    border-color: #999 !important;
+    background: transparent !important;
+    color: #000 !important;
+  }
+}

@@ -5,6 +5,7 @@ layout: default
   <div class="workshop-layout with-sidebar">
     {% include sidebar.html %}
     <main class="main-content" id="main-content">
+      {% include breadcrumb.html %}
       <div class="step-header">
         <span class="step-number-badge">Step {{ page.step_number }}</span>
         <h1 class="step-title">{{ page.title }}</h1>
@@ -17,6 +18,9 @@ layout: default
       </div>
 
       {% include step-nav.html %}
+      <div class="keyboard-hint">
+        <kbd>←</kbd> <kbd>→</kbd> to navigate between steps
+      </div>
     </main>
   </div>
 </div>

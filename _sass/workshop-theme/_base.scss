@@ -44,3 +44,38 @@ hr {
   border-top: 1px solid var(--border-primary);
   margin: 32px 0;
 }
+
+// Skip link for accessibility
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 16px;
+  z-index: 200;
+  padding: 8px 16px;
+  background: var(--bg-primary);
+  border: 2px solid $gh-green;
+  border-radius: 6px;
+  font-weight: 600;
+  color: var(--text-primary);
+  text-decoration: none;
+
+  &:focus {
+    top: 8px;
+  }
+}
+
+// Focus ring for keyboard navigation
+*:focus-visible {
+  outline: 2px solid $gh-green;
+  outline-offset: 2px;
+}
+
+// Respect reduced motion preference
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

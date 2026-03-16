@@ -1,0 +1,101 @@
+name: Validate Theme
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.3'
+          bundler-cache: true
+
+      - name: Create test site
+        run: |
+          mkdir -p _test-site
+          cat > _test-site/_config.yml << 'EOF'
+          title: "Theme Validation Test"
+          description: "Testing that the theme builds correctly"
+          theme: null
+          plugins: []
+          sass:
+            sass_dir: ../_sass
+          workshop:
+            category: "copilot-ai"
+            difficulty: "Beginner"
+            duration: "1 hour"
+            language: "Python"
+            prerequisites:
+              - "Git installed"
+            hub_url: "https://example.com"
+            repo_url: "https://github.com/test/repo"
+          EOF
+
+          cat > _test-site/index.md << 'EOF'
+          ---
+          layout: workshop
+          title: "Test Workshop"
+          description: "Testing the theme"
+          ---
+          # Test Content
+          This is a test page to validate the theme builds.
+          EOF
+
+          cat > _test-site/Gemfile << 'EOF'
+          source "https://rubygems.org"
+          gem "jekyll", "~> 4.3"
+          gem "webrick"
+          EOF
+
+      - name: Build test site
+        run: |
+          cd _test-site
+          bundle install
+          JEKYLL_ENV=production bundle exec jekyll build \
+            --layouts ../_layouts \
+            --plugins ../_plugins 2>&1
+        continue-on-error: false
+
+      - name: Validate SCSS compiles
+        run: |
+          gem install sassc
+          sassc _sass/workshop-theme.scss /dev/null --style compressed
+          echo "✅ SCSS compiled successfully"
+
+      - name: Check required files exist
+        run: |
+          files=(
+            "_layouts/default.html"
+            "_layouts/workshop.html"
+            "_layouts/step.html"
+            "_layouts/cheatsheet.html"
+            "_includes/head.html"
+            "_includes/header.html"
+            "_includes/footer.html"
+            "_includes/sidebar.html"
+            "_includes/toc.html"
+            "_includes/breadcrumb.html"
+            "_sass/workshop-theme.scss"
+            "assets/js/workshop.js"
+            "assets/css/style.scss"
+          )
+          missing=0
+          for f in "${files[@]}"; do
+            if [ ! -f "$f" ]; then
+              echo "❌ Missing: $f"
+              missing=$((missing + 1))
+            else
+              echo "✅ Found: $f"
+            fi
+          done
+          if [ $missing -gt 0 ]; then
+            echo "::error::$missing required files are missing"
+            exit 1
+          fi

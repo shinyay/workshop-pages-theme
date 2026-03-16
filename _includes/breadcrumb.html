@@ -1,0 +1,19 @@
+{% assign chevron = '<svg viewBox="0 0 16 16" width="12" height="12" fill="currentColor"><path d="M6.22 3.22a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042L9.94 8 6.22 4.28a.75.75 0 0 1 0-1.06Z"/></svg>' %}
+<nav class="breadcrumb" aria-label="Breadcrumb">
+  {% if site.workshop.hub_url %}
+  <a href="{{ site.workshop.hub_url }}">Hub</a>
+  <span class="breadcrumb-sep">{{ chevron }}</span>
+  {% endif %}
+  <a href="{{ '/' | relative_url }}">{{ site.title }}</a>
+  {% if page.layout == 'step' and page.step_number %}
+  <span class="breadcrumb-sep">{{ chevron }}</span>
+  <span class="breadcrumb-current">
+    {% if page.step_number == 0 %}Setup{% else %}Level {{ page.step_number }}{% endif %}
+  </span>
+  {% elsif page.layout == 'cheatsheet' and page.parent_step %}
+  <span class="breadcrumb-sep">{{ chevron }}</span>
+  <a href="{{ '/steps/' | append: page.parent_step | append: '/' | relative_url }}">Level {{ page.parent_step }}</a>
+  <span class="breadcrumb-sep">{{ chevron }}</span>
+  <span class="breadcrumb-current">Cheatsheet</span>
+  {% endif %}
+</nav>

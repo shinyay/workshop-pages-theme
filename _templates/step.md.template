@@ -1,0 +1,63 @@
+---
+# Step Template — Copy this file and customize for your workshop
+# Required fields are marked with (required)
+layout: step           # (required) Must be "step"
+title: "Step Title"    # (required) Displayed in sidebar and page header
+step_number: 1         # (required) Integer, determines order (0 = setup)
+permalink: /steps/1/   # (required) URL path for this step
+# duration: "45-60 min"  # (optional) Shown in sidebar if provided
+---
+
+## Learning Objectives
+
+By the end of this step, you will be able to:
+
+1. First objective
+2. Second objective
+
+---
+
+## Prerequisites
+
+- Completed Step 0 (Setup)
+- Previous step completed
+
+---
+
+## Exercise 1: Title
+
+### Goal
+
+Describe what the learner will accomplish.
+
+### Steps
+
+**1.1** First instruction:
+
+```bash
+command --to-run
+```
+
+**1.2** Second instruction:
+
+> [!TIP]
+> Helpful tip for the learner.
+
+---
+
+## Exercise 2: Title
+
+### Goal
+
+Describe what the learner will accomplish.
+
+### Steps
+
+**2.1** First instruction:
+
+```bash
+another-command
+```
+
+> [!NOTE]
+> Important context or explanation.

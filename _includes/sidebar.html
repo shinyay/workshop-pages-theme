@@ -1,18 +1,18 @@
 {% assign steps = site.pages | where: "layout", "step" | sort: "step_number" %}
 {% assign cheatsheets = site.pages | where: "layout", "cheatsheet" | sort: "parent_step" %}
 {% if steps.size > 0 %}
-<aside class="sidebar" id="sidebar">
+<aside class="sidebar" id="sidebar" role="navigation" aria-label="Workshop steps">
   <div class="sidebar-title">Workshop Steps</div>
   <ul class="step-list">
     <li class="step-item">
-      <a href="{{ '/' | relative_url }}" class="step-link {% if page.layout == 'workshop' %}active{% endif %}">
+      <a href="{{ '/' | relative_url }}" class="step-link {% if page.layout == 'workshop' %}active{% endif %}" {% if page.layout == 'workshop' %}aria-current="page"{% endif %}>
         <span class="step-dot"></span>
         Overview
       </a>
     </li>
     {% for step in steps %}
     <li class="step-item">
-      <a href="{{ step.url | relative_url }}" class="step-link {% if page.url == step.url %}active{% endif %}">
+      <a href="{{ step.url | relative_url }}" class="step-link {% if page.url == step.url %}active{% endif %}" data-step="{{ step.step_number }}" {% if page.url == step.url %}aria-current="page"{% endif %}>
         <span class="step-dot"></span>
         {% if step.step_number == 0 %}
         🔧 {{ step.title }}
@@ -22,7 +22,7 @@
       </a>
       {% for cs in cheatsheets %}
         {% if cs.parent_step == step.step_number and step.step_number != 0 %}
-        <a href="{{ cs.url | relative_url }}" class="step-link step-sub-link {% if page.url == cs.url %}active{% endif %}">
+        <a href="{{ cs.url | relative_url }}" class="step-link step-sub-link {% if page.url == cs.url %}active{% endif %}" {% if page.url == cs.url %}aria-current="page"{% endif %}>
           <span class="step-dot step-dot-sm"></span>
           📋 Cheatsheet
         </a>
@@ -34,17 +34,11 @@
 
   {% if site.workshop.show_progress != false %}
   {% assign real_steps = steps | where_exp: "s", "s.step_number > 0" %}
-  {% assign current_step = page.step_number | default: 0 %}
   {% assign total_steps = real_steps.size %}
-  {% if current_step > 0 %}
-  {% assign progress = current_step | times: 100 | divided_by: total_steps %}
-  {% else %}
-  {% assign progress = 0 %}
-  {% endif %}
-  <div class="sidebar-progress">
-    <div class="progress-label">Progress: {{ current_step }}/{{ total_steps }}</div>
+  <div class="sidebar-progress" id="sidebar-progress" data-total="{{ total_steps }}">
+    <div class="progress-label">Progress: 0/{{ total_steps }}</div>
     <div class="progress-bar">
-      <div class="progress-fill" style="width: {{ progress }}%"></div>
+      <div class="progress-fill" style="width: 0%"></div>
     </div>
   </div>
   {% endif %}
