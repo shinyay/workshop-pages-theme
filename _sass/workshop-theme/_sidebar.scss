@@ -71,6 +71,16 @@
     border-color: $gh-green;
     box-shadow: 0 0 6px rgba($gh-green, 0.4);
   }
+
+  &.step-dot-sm {
+    width: 6px;
+    height: 6px;
+  }
+}
+
+.step-sub-link {
+  padding-left: 28px !important;
+  font-size: 12px !important;
 }
 
 // Progress bar

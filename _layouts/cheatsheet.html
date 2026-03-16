@@ -1,0 +1,39 @@
+---
+layout: default
+---
+<div class="step-page cheatsheet-page">
+  <div class="workshop-layout with-sidebar">
+    {% include sidebar.html %}
+    <main class="main-content" id="main-content">
+      <div class="step-header">
+        <span class="step-number-badge cheatsheet-badge">📋 Cheatsheet</span>
+        <h1 class="step-title">{{ page.title }}</h1>
+        {% if page.parent_step %}
+        <a href="{{ '/steps/' | append: page.parent_step | append: '/' | relative_url }}" class="cheatsheet-back">
+          ← Back to Level {{ page.parent_step }}
+        </a>
+        {% endif %}
+      </div>
+
+      {% include toc.html %}
+
+      <div class="content-body">
+        {{ content }}
+      </div>
+
+      {% if page.parent_step %}
+      <div class="step-navigation">
+        <a href="{{ '/steps/' | append: page.parent_step | append: '/' | relative_url }}" class="step-nav-btn">
+          <svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor"><path d="M7.78 12.53a.75.75 0 0 1-1.06 0L2.47 8.28a.75.75 0 0 1 0-1.06l4.25-4.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042L4.81 7h7.44a.75.75 0 0 1 0 1.5H4.81l2.97 2.97a.75.75 0 0 1 0 1.06Z"/></svg>
+          <div>
+            <div class="step-nav-label">Back to</div>
+            <div class="step-nav-title">Level {{ page.parent_step }} Exercises</div>
+          </div>
+        </a>
+        <span></span>
+        <span></span>
+      </div>
+      {% endif %}
+    </main>
+  </div>
+</div>

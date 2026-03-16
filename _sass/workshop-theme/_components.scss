@@ -253,6 +253,27 @@
   white-space: nowrap;
 }
 
+// --- Cheatsheet Page ---
+.cheatsheet-badge {
+  background: var(--callout-note-bg) !important;
+  border-color: var(--callout-note-border) !important;
+  color: var(--callout-note-border) !important;
+}
+
+.cheatsheet-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 14px;
+  color: var(--text-link);
+  text-decoration: none;
+  margin-top: 8px;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
 // --- Callout Boxes ---
 .callout {
   padding: 16px 20px;
